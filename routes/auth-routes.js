@@ -20,8 +20,12 @@ router.get('/google', passport.authenticate('google', {
 }));
 
 // callback para redireccionar desde google
-router.get('/google/redirect', ( req, res ) => {
-    res.send('llegaste al callback para google login');
-});
+router.get('/google/redirect',
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    (req, res) => {
+        res.redirect('/');
+    }
+    //res.send('aquí deberíamos manejar los resultados del login. Por ejemplo, guardar en base de datos el token, perfil, etc...');
+);
 
 module.exports = router;

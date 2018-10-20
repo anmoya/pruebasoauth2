@@ -3,14 +3,19 @@ const passport = require('passport');
 
 
 // Ruta auth/login
-router.get('/login', ( req , res ) => {
+router.get('/login', (req, res) => {
     res.render('login', { user: req.user });
 });
 
 // Logout
-router.get('/logout', ( req, res ) => {
+router.get('/logout', (req, res) => {
     res.send('Saliendo...');
 });
+
+
+/* ##################
+    GOOGLE
+#################### */
 
 // Autorización Google
 router.get('/google', passport.authenticate('google', {
@@ -21,9 +26,16 @@ router.get('/google', passport.authenticate('google', {
 
 // callback para redireccionar desde google
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-        res.redirect('/profile/');
-    }
-    //res.send('aquí deberíamos manejar los resultados del login. Por ejemplo, guardar en base de datos el token, perfil, etc...');
-);
+    res.redirect('/profile/');
+});
+
+/* ##################
+    Facebook
+#################### */
+router.get('/facebook', passport.authenticate('facebook'));
+
+router.get('/facebook/redirect', passport.authenticate('facebook'), (req, res) => {
+    res.redirect('/profile/');
+});
 
 module.exports = router;

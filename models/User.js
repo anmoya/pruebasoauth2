@@ -1,13 +1,11 @@
 const mongoose = require ('mongoose');
-var findOrCreate = require('mongoose-findorcreate');
+const Schema = mongoose.Schema;
 
-
-
-let userSchema = new mongoose.Schema({
-    id : String,
-    user : String
+const userSchema = new Schema({
+    username    : String,
+    googleId    : String
 });
-userSchema.plugin(findOrCreate);
-const userModel = mongoose.model('User', userSchema);
 
-module.exports = userModel;
+const User = mongoose.model('user', userSchema);
+
+module.exports = User;

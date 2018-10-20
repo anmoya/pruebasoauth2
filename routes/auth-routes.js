@@ -9,7 +9,8 @@ router.get('/login', (req, res) => {
 
 // Logout
 router.get('/logout', (req, res) => {
-    res.send('Saliendo...');
+    req.logout();
+    res.redirect('/');
 });
 
 
